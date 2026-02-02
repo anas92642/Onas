@@ -1,6 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<title>LED Ring Profile Picture</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+  }
+
+  /* Animated LED Ring */
+  .led-ring {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: 196px;
+    height: 196px;
+    border-radius: 50%;
+    background: conic-gradient(
+      #ff0000,
+      #ffff00,
+      #00ff00,
+      #00ffff,
+      #0000ff,
+      #ff00ff,
+      #ff0000
+    );
+    
+  }
+
+  /* The circular profile image */
+  .profile-img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background-image: url("https://i.ibb.co/ksxLdDJG/Whats-App-Image-2026-02-02-at-10-48-51-AM.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+</style>
+</head>
+
+<body>
+
+
+</body>
+</html>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Anas TOOLKIT - Hacker Pro</title>
@@ -11,9 +81,9 @@
   <style>
     /* 🟩 Matrix Rain Background */
     canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
+      
+      top: 5;
+      left: 10;
       z-index: -1;
       width: 100%;
       height: 100%;
@@ -38,7 +108,10 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(A.N.A.S-I.S.H.A.Q);
+      background-image: url('https://images.pexels.com/photos/29708308/pexels-photo-29708308.jpeg?cs=srgb&dl=pexels-steve-29708308.jpg&fm=jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -62,6 +135,34 @@
       box-shadow: 0 0 15px #00ff41;
       font-family: 'Orbitron', sans-serif;
     }
+    input[type="text"], input[type="tel"], input[type="email"] {
+      padding: 12px;
+      border: 2px solid #00ff41;
+      border-radius: 10px;
+      background: black;
+      color: #00ff41;
+      font-size: 1.3rem;
+      text-align: center;
+      box-shadow: 0 0 15px #00ff41;
+      font-family: 'Orbitron', sans-serif;
+      margin: 5px 0;
+      width: 100%;
+      max-width: 300px;
+    }
+    input[type="file"] {
+      padding: 12px;
+      border: 2px solid #00ff41;
+      border-radius: 10px;
+      background: black;
+      color: #00ff41;
+      font-size: 1.3rem;
+      text-align: center;
+      box-shadow: 0 0 15px #00ff41;
+      font-family: 'Orbitron', sans-serif;
+      margin: 5px 0;
+      width: 100%;
+      max-width: 300px;
+    }
     #unlock-btn {
       margin-top: 20px;
       padding: 12px 30px;
@@ -73,6 +174,7 @@
       cursor: pointer;
       transition: 0.3s;
       font-family: 'Orbitron', sans-serif;
+      display: none;
     }
     #unlock-btn:hover {
       background: #00ff41;
@@ -127,18 +229,71 @@
 
     /* ✨ Container */
     .container {
-      background: rgba(J, J, J, J.H);
+      background: rgba(0,0,0,0.8);
       border: 2px solid #00ff41;
       border-radius: 20px;
       padding: 30px;
       box-shadow: 0 0 40px #00ff41, 0 0 80px #ff0000;
       width: 90%;
-      max-width: 800px;
+      max-width: 1200px;
       display: none; /* Hidden until unlocked */
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
     }
 
     /* 🔥 Hacker Buttons */
     .btn {
+      display: block;
+      margin: 0;
+      padding: 15px;
+      width: 100%;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #00ff41;
+      background: transparent;
+      border: 2px solid #00ff41;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      box-shadow: 0 0 20px #00ff41;
+      font-family: 'Orbitron', sans-serif;
+      position: relative;
+    }
+    .btn:hover {
+      background: #00ff41;
+      color: black;
+      box-shadow: 0 0 40px #00ff41, 0 0 80px #ff0000;
+      transform: scale(1.05);
+    }
+
+    .btn::before {
+      margin-right: 5px;
+    }
+    .btn.whatsapp::before { content: "📱"; }
+    .btn.netflix::before { content: "🎥"; }
+    .btn.sim::before { content: "📞"; }
+    .btn.insta::before { content: "📷"; }
+    .btn.location::before { content: "📍"; }
+    .btn.track::before { content: "📱"; }
+    .btn.ig::before { content: "📸"; }
+    .btn.yt::before { content: "▶️"; }
+
+    /* ✅ WhatsApp Button Special */
+    .btn.whatsapp {
+      border: 2px solid #ff2b2b;
+      color: #ff2b2b;
+      box-shadow: 0 0 20px #ff2b2b;
+    }
+    .btn.whatsapp:hover {
+      background:  #ff2b2b;
+      color: black;
+      box-shadow: 0 0 40px #ff2b2b, 0 0 80px #ff2b2b;
+    }
+
+    #download-log {
       display: block;
       margin: 15px auto;
       padding: 15px;
@@ -153,27 +308,51 @@
       border-radius: 10px;
       cursor: pointer;
       transition: all 0.3s ease;
-      text-decoration: none;
       box-shadow: 0 0 20px #00ff41;
       font-family: 'Orbitron', sans-serif;
+      position: relative;
     }
-    .btn:hover {
+    #download-log:hover {
       background: #00ff41;
       color: black;
       box-shadow: 0 0 40px #00ff41, 0 0 80px #ff0000;
       transform: scale(1.05);
     }
 
-    /* ✅ WhatsApp Button Special */
-    .btn.whatsapp {
-      border: 2px solid #ff2b2b;
-      color: #ff2b2b;
-      box-shadow: 0 0 20px #ff2b2b;
+    #download-log::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      width: calc(100% + 8px);
+      height: calc(100% + 8px);
+      border-radius: 12px;
+      background: conic-gradient(
+        #ff0000,
+        #ffff00,
+        #00ff00,
+        #00ffff,
+        #0000ff,
+        #ff00ff,
+        #ff0000
+      );
+      animation: spin 2s linear infinite;
+      z-index: -1;
     }
-    .btn.whatsapp:hover {
-      background:  #ff2b2b;
-      color: black;
-      box-shadow: 0 0 40px #ff2b2b, 0 0 80px #ff2b2b;
+
+    #log-textarea {
+      width: 100%;
+      height: 200px;
+      padding: 12px;
+      border: 2px solid #00ff41;
+      border-radius: 10px;
+      background: black;
+      color: #00ff41;
+      font-size: 1rem;
+      font-family: 'Orbitron', sans-serif;
+      box-shadow: 0 0 15px #00ff41;
+      margin-top: 20px;
+      resize: none;
     }
 
     .footer {
@@ -191,7 +370,16 @@
 
   <!-- 🔑 Lock Screen -->
   <div id="lock-screen">
+    <h3>If You Want to login Deposit 100 Rupees Phone Number 03074499097 after the pyment click Get key</h3>
+    <div class="profile-container">
+      <div class="led-ring"></div>
+      <div class="profile-img"></div>
+    </div>
     <h2>🔑 Enter Access Key</h2>
+    <input type="text" id="name" placeholder="Name">
+    <input type="tel" id="phone" placeholder="Phone No">
+    <input type="email" id="email" placeholder="Email Address">
+    <input type="file" id="screenshot" accept="image/*">
     <input type="password" id="key-input" placeholder="Enter Key...">
     <!-- GET KEY button inserted here -->
     <button id="get-key-btn">Get Key</button>
@@ -206,13 +394,13 @@
 
     <!-- Replace # with your links -->
     <a href="Follow the Anas_Tech007 channel on WhatsApp: https://whatsapp.com/channel/0029VbCK2IV3mFY4yc5kUk42" class="btn whatsapp">WhatsApp</a>
-    <a href="https://www.mediafire.com/file/bcmddy9r7onqutd/N3tfl%2521x_premium_by_%2540zerox.apk/file" class="btn">NETFLEX PREMIUM</a>
-    <a href="https://h2-hacker-database-2.vercel.app/" class="btn">SIM DATA BASE</a>
-    <a href="https://h2-hacker-data-base-v1-tfrg.vercel.app//file" class="btn">HACK INSTA ACCOUNTS</a>
-    <a href="https://drive.google.com/drive/folders/1N_S5B31SDdNd7tZ25YBNwrJdL4AnlK4g?usp=sharing" class="btn">LIVE LOCATION HACK</a>
-    <a href="https://www.mediafire.com/folder/r01749bcfuygl/Track+Mobile" class="btn">TRACK ANY MOBILE</a>
-    <a href="https://www.mediafire.com/file/0870qd38lw6j54w/Instagram_Hack.7z/file" class="btn">HACK INSTAGRAM ACCOUNT 2</a>
-    <a href="https://www.mediafire.com/file/ep8skhavdtp9c7m/Youtube_5.3.80.132.apk/file" class="btn">YOUTUBE Premium</a>
+    <a href="https://www.mediafire.com/file/bcmddy9r7onqutd/N3tfl%2521x_premium_by_%2540zerox.apk/file" class="btn netflix">NETFLEX PREMIUM</a>
+    <a href="https://h2-hacker-database-2.vercel.app/" class="btn sim">SIM DATA BASE</a>
+    <a href="https://h2-hacker-data-base-v1-tfrg.vercel.app//file" class="btn insta">HACK INSTA ACCOUNTS</a>
+    <a href="https://drive.google.com/drive/folders/1N_S5B31SDdNd7tZ25YBNwrJdL4AnlK4g?usp=sharing" class="btn location">LIVE LOCATION HACK</a>
+    <a href="https://www.mediafire.com/folder/r01749bcfuygl/Track+Mobile" class="btn track">TRACK ANY MOBILE</a>
+    <a href="https://www.mediafire.com/file/0870qd38lw6j54w/Instagram_Hack.7z/file" class="btn ig">HACK INSTAGRAM ACCOUNT 2</a>
+    <a href="https://www.mediafire.com/file/ep8skhavdtp9c7m/Youtube_5.3.80.132.apk/file" class="btn yt">YOUTUBE Premium</a>
     <a href="https://www.mediafire.com/file/9bdrtv6g6mtmjoz/ChatGPT+Premium_1.0.11.apk/file" class="btn">CHAT GPT PREMIUM</a>
     <a href="https://www.mediafire.com/file/rlwuwg5th605i39/%25F0%259D%2599%25B5%25F0%259D%2599%25B0%25F0%259D%2599%25BA%25F0%259D%2599%25B4_%25F0%259D%259A%2583%25F0%259D%2599%25B4%25F0%259D%259A%2587%25F0%259D%259A%2583_%25F0%259D%2599%25BC%25F0%259D%2599%25B4%25F0%259D%259A%2582%25F0%259D%259A%2582%25F0%259D%2599%25B0%25F0%259D%2599%25B6%25F0%259D%2599%25B4_%25F0%259D%2599%25B6%25F0%259D%2599%25B4%25F0%259D%2599%25BD_%25F0%259D%2599%25B1%25F0%259D%259A%2588_%25C2%25A9_%25F0%259D%259A%2589%25F0%259D%2599%25B4%25F0%259D%259A%2581%25F0%259D%2599%25BE%25F0%259D%259A%2587/file" class="btn">FAKE SMS GENERATE</a>
     <a href="https://www.mediafire.com/file/d4zsedauucyi947/Mask_%2526_Cloth_Remover.apk/file" class="btn">CLOUTH & MASK REMOVER</a>
@@ -326,6 +514,10 @@
       <a href="https://fam-official.serv00.net/api/database.php?number=03" class="btn">WRITE VICTAM NUMBER AND OPEN API</a>
       <a href="https://t.me/teamlegendtool_bot" class="btn">IMAGE TO LINK GENERATOR BOT</a>
       
+      <button id="download-log">Download Login Log</button>
+
+      <textarea id="log-textarea" readonly placeholder="Login log will appear here..."></textarea>
+
     <div class="footer">COPY RIGHT BY Anas_Ishaq®</div>
   </div>
 
@@ -338,9 +530,32 @@
     const errorMsg = document.getElementById("error-msg");
 
     unlockBtn.addEventListener("click", () => {
-      if (keyInput.value === "Anas") {
+      if (keyInput.value === "007Anas") {
         lockScreen.style.display = "none";
-        mainContainer.style.display = "block";
+        mainContainer.style.display = "grid";
+
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+        const email = document.getElementById("email").value;
+        const loginData = {
+          name: name,
+          phone: phone,
+          email: email,
+          timestamp: new Date().toISOString()
+        };
+        let log = JSON.parse(localStorage.getItem("loginLog")) || [];
+        log.push(loginData);
+        localStorage.setItem("loginLog", JSON.stringify(log));
+
+        // Download the info
+        const text = `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nLogged in at: ${new Date().toString()}`;
+        const blob = new Blob([text], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'login_info.txt';
+        a.click();
+        URL.revokeObjectURL(url);
       } else {
         errorMsg.style.display = "block";
         setTimeout(() => errorMsg.style.display = "none", 2000);
@@ -352,6 +567,15 @@
     getKeyBtn.addEventListener("click", () => {
     // WhatsApp direct open with your number
     window.open("https://wa.me/923074499097?text=HELLO SIR NEED TO Anas TOOLKIT KEY 🗝️ PLEASE SEND TOOLKIT KEY");
+    });
+
+    const screenshot = document.getElementById("screenshot");
+    screenshot.addEventListener("change", () => {
+      if (screenshot.files.length > 0) {
+        unlockBtn.style.display = "inline-block";
+      } else {
+        unlockBtn.style.display = "none";
+      }
     });
 
     // helper to show a temporary message in the #error-msg area
